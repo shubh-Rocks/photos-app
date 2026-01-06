@@ -8,7 +8,7 @@ const App = () => {
 
   const getdata = async () => {
     const photoResponse = await axios.get(
-      `https://picsum.photos/v2/list?page=${index}&limit=15`
+      `https://picsum.photos/v2/list?page=${index}&limit=10`
     );
     setUserData(photoResponse.data);
   };
@@ -35,7 +35,7 @@ const App = () => {
                 alt={elem.author}
                 className="w-full h-full object-cover rounded-xl "
               />
-              <h3 className="text-sm text-gray-800 bg-white p-1 text-center">
+              <h3 className="text-sm text-gray-800 rounded-full p-1 text-center">
                 {elem.author}
               </h3>
             </div>
@@ -48,7 +48,29 @@ const App = () => {
   return (
     <div className="bg-blue-200 h-screen text-white p-4">
       <h1 className="text-6xl text-white fixed font-bold">{index}</h1>
-      <div className="flex flex-wrap gap-6 p-2">{printUserData}</div>
+      <div className="flex flex-wrap gap-4 p-5">{printUserData}</div>
+
+      <div className="flex justify-center gap-4 p-4 items-center">
+        <button
+          onClick={() => {
+            if (index > 1) {
+              setindex(index - 1);
+            }
+          }}
+          className="bg-amber-500 text-violet-950 text-sm cursor-pointer active:scale-95 px-4 rounded-2xl py-3"
+        >
+          Prev
+        </button>
+        <h4 className="text-violet-950">Pages {index}</h4>
+        <button
+          onClick={() => {
+            setindex(index + 1);
+          }}
+          className="bg-amber-500 text-violet-950 text-sm cursor-pointer active:scale-95 px-4 rounded-2xl py-3"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
